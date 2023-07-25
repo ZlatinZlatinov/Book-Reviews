@@ -1,2 +1,2 @@
 # Book-Reviews
-A full-stack web application with Angular and Node.js
+MEAN - stack web application

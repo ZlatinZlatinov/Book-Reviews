@@ -1,0 +1,112 @@
+/* .login-form-container {
+  background: url(../image/banner-bg.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+}*/
+
+.form-container {
+  padding-top: 2.5rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+} 
+
+.form-container.active {
+  right: 0;
+}
+
+.form-container form {
+  background: #fff;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  width: 27.5rem;
+  padding: 2rem;
+  box-shadow: 0 0 10px #43414f70;
+  border-radius: 0.5rem;
+  margin-bottom:10rem;
+  height: auto;
+  /*width: 30%;*/
+}
+
+.form-container form h3 {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #444;
+  text-align: center;
+}
+
+.form-container form label {
+  display: block;
+  font-size: 1rem;
+  padding-top: 1rem;
+}
+
+.form-container form .box {
+  width: 100%;
+  margin: 0.7rem 0;
+  font-size: 0.9rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem 1.2rem;
+  color: #444;
+  text-transform: none;
+}
+
+.form-container form .checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0;
+}
+
+.form-container form .checkbox label {
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.form-container form .btn {
+  text-align: center;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.form-container form p {
+  padding-top: 0.8rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+.form-container form p a {
+  color: #27ae60;
+  text-decoration: underline;
+}
+
+.form-container #close-login-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 2.5rem;
+  font-size: 5rem;
+  color: #444;
+  cursor: pointer;
+} 
+
+.form-container form .error { 
+  text-align: center;
+  padding-top: 0.8rem;
+  color: red;
+  font-size: 0.9rem;
+} 
+
+.form-container .input-error{
+  width: 100%;
+  margin: 0.7rem 0;
+  font-size: 0.9rem;
+  border: 1px solid red;
+  border-radius: 0.5rem;
+  padding: 1rem 1.2rem;
+  color: #444;
+  text-transform: none;
+}

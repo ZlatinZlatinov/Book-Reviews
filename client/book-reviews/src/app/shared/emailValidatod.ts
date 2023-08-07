@@ -7,6 +7,7 @@ export function emailValidator(emailValue: string): ValidatorFn {
         const group = controls as FormGroup;
         const email = group.get(emailValue);
         const test = regExp.test(email?.value);
+        
         return controls.value === "" || regExp.test(controls.value)
             ? null
             : { emailValidator: true };

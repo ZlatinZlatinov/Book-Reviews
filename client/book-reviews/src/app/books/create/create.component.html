@@ -1,19 +1,62 @@
 <section class="form-container">
 
-    <form action="">
+    <form [formGroup]="form" (ngSubmit)="createBook()">
         <h3>Create Book Review</h3>
+
+        <!--Title-->
         <label>Title</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="title" class="box" formControlName="title">
+        <ng-container *ngIf="form.get('title')?.touched">
+            <span class="error" *ngIf="form.get('title')?.errors?.['required'] ||
+            form.get('title')?.errors?.['minlength']">
+                Book title is required with atleast 3 characters length
+            </span>
+
+        </ng-container>
+
+        <!--Author-->
         <label>Author</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="author" class="box" formControlName="author">
+        <ng-container *ngIf="form.get('author')?.touched">
+            <span class="error" *ngIf="form.get('author')?.errors?.['required'] || 
+            form.get('author')?.errors?.['minlength']">
+                Book author is required with atleast 5 characters length
+            </span>
+        </ng-container>
+
+        <!--Genre-->
         <label>Genre</label>
-        <input type="text" name="" class="box" id="">
-        <label>Stars</label>
-        <input type="number" name="" class="box" id="">
+        <input type="text" name="genre" class="box" formControlName="genre">
+        <ng-container *ngIf="form.get('genre')?.touched">
+            <span class="error" *ngIf="form.get('genre')?.errors?.['required'] || 
+            form.get('genre')?.errors?.['minlength']">
+                Book genre is required with atleast 4 characters length
+            </span>
+        </ng-container>
+
+        <!--Image-->
         <label>Image</label>
-        <input type="text" name="" class="box" id="">
+        <input type="text" name="img" class="box" formControlName="img">
+        <ng-container *ngIf="form.get('img')?.touched">
+            <span class="error" *ngIf="form.get('img')?.errors?.['required'] || 
+            form.get('img')?.errors?.['maxlength']">
+                Image addres is required with maximum of 250 characters
+            </span>
+            <span class="error" *ngIf="form.get('img')?.errors?.['imageValidator']">
+                Image address should strat with http:// or https://
+            </span>
+
+        </ng-container>
+
+        <!--Review-->
         <label>Review</label>
-        <textarea class="box" name=""></textarea>
+        <textarea class="box" name="review" formControlName="review"></textarea>
+        <ng-container *ngIf="form.get('review')?.touched">
+            <span class="error" *ngIf="form.get('review')?.errors?.['required']">
+                Book review is required with atleast 20 charactes length
+            </span>
+        </ng-container>
+
         <input type="submit" value="Create" class="btn">
     </form>
 </section>

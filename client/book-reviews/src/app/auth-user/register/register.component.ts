@@ -16,16 +16,19 @@ export class RegisterComponent {
     passGroup: this.fb.group({
       password: ["", [Validators.required, Validators.minLength(6)]],
       rePass: ["", [Validators.required,]]
-    }, 
-    {
-      validators: [matchPasswordsValidator('password', 'rePass')],
-    })
+    },
+      {
+        validators: [matchPasswordsValidator('password', 'rePass')],
+      })
   })
 
   constructor(private fb: FormBuilder) { }
 
-  regUser(): void{
+  regUser(): void {
+    if (this.form.invalid) {
+      return;
+    }
     console.log(this.form.value);
-    
+
   }
 }

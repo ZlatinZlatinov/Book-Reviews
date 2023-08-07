@@ -1,13 +1,27 @@
 <section class="form-container">
 
-	<form action="">
+	<form [formGroup]="form" (ngSubmit)="logUser()">
 		<h3>Login</h3>
+
+		<!--Email-->
 		<label>Email</label>
-		<input type="email" name="" class="box" id="">
+		<input type="email" name="email" class="box" formControlName="email">
+
+		<ng-container *ngIf="form.get('email')?.touched">
+			<span class="error" *ngIf="form.get('email')?.errors?.['required']">Email is required!</span>
+			<span class="error" *ngIf="form.get('email')?.errors?.['emailValidator']">This is not a valid email
+				address!</span>
+		</ng-container>
+
+		<!--Password-->
 		<label>Password</label>
-		<input type="password" name="" class="input-error" id="">
-		<p class="error">Wrong username or password!</p>
-		<input type="submit" value="Login" class="btn">
-		<p>Don't have an account ? <a href="#">Create one</a></p>
+		<input type="password" name="password" class="box" formControlName="password">
+
+		<ng-container *ngIf="form.get('password')?.touched">
+			<span class="error" *ngIf="form.get('password')?.errors?.['required']">Password is required!</span>
+		</ng-container>
+
+		<input type="submit" value="Login" class="btn" disabled="!form.ivalid">
+		<p>Don't have an account ? <a routerLink="/register">Create one</a></p>
 	</form>
 </section>

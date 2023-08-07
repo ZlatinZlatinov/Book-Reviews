@@ -1,15 +1,59 @@
 <section class="form-container">
 
-    <form action="">
+    <form [formGroup]="form" (ngSubmit)="regUser()">
         <h3>Register</h3>
+
+        <!--Email-->
         <label>Email</label>
-        <input type="email" name="" class="box" id="">
+        <input type="email" name="email" class="box" formControlName="email" placeholder="Example: user@mail.com">
+
+        <ng-container *ngIf="form.get('email')?.touched">
+            <span class="error" *ngIf="form.get('email')?.errors?.['required']">Email is required!</span>
+            <span class="error" *ngIf="form.get('email')?.errors?.['minlength']">Email should be atleast 3 characters
+                long!</span>
+            <span class="error" *ngIf="form.get('email')?.errors?.['emailValidator']">This is not a valid email
+                address!</span>
+        </ng-container>
+
+        <!--Username-->
         <label>Username</label>
-        <input type="text" name="" class="box" id="">
-        <label>Password</label>
-        <input type="password" name="" class="box" id="">
-        <label>Confirm Password</label>
-        <input type="password" name="" class="box" id="">
+        <input type="text" name="username" class="box" formControlName="username" placeholder="Example: John_Cena">
+
+        <ng-container *ngIf="form.get('username')?.touched">
+            <span class="error" *ngIf="form.get('username')?.errors?.['required']">Username is required!</span>
+            <span class="error" *ngIf="form.get('username')?.errors?.['minlength']">Sould be atleast 5 characters
+                long!</span>
+        </ng-container>
+
+        <!--Password Group-->
+        <ng-container formGroupName="passGroup">
+
+            <!--Password-->
+            <label>Password</label>
+            <input type="password" name="password" class="box" formControlName="password"
+                placeholder="Should be atleast 6 characters long!">
+
+            <ng-container *ngIf="form.get('passGroup')?.get('password')?.touched">
+                <span class="error" *ngIf="form.get('passGroup')?.get('password')?.errors?.['required']">Password is
+                    required!</span>
+                <span class="error" *ngIf="form.get('passGroup')?.get('password')?.errors?.['minlength']">Password
+                    should be atleast 6
+                    characters
+                    long!</span>
+            </ng-container>
+
+            <!--Confirm Password-->
+            <label>Confirm Password</label>
+            <input type="password" name="rePass" class="box" formControlName="rePass"
+                placeholder="Sould be same as password">
+
+            <ng-container *ngIf="form.get('passGroup')?.get('rePass')?.touched">
+                <span class="error" *ngIf="form.get('passGroup')?.get('rePass')?.errors?.['required'] ||
+                form.get('passGroup')?.errors?.['matchPasswordsValidator']">Password and
+                    Confirm Password must be equal!</span>
+            </ng-container>
+
+        </ng-container>
         <input type="submit" value="Register" class="btn">
         <p>Have an account ? <a href="#">Click here</a></p>
     </form>

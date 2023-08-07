@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthUserModule } from './auth-user/auth-user.module';
 import { AboutComponent } from './about/about.component';
 import { BooksModule } from './books/books.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BooksModule } from './books/books.module';
     AppRoutingModule, 
     CoreModule, 
     AuthUserModule, 
-    BooksModule
+    BooksModule, 
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

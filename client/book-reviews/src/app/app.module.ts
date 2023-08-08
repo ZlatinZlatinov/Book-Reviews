@@ -9,6 +9,8 @@ import { AuthUserModule } from './auth-user/auth-user.module';
 import { AboutComponent } from './about/about.component';
 import { BooksModule } from './books/books.module';
 import { SharedModule } from './shared/shared.module';
+import { appInterceptorProvider } from './app.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,13 +20,14 @@ import { SharedModule } from './shared/shared.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
-    CoreModule, 
-    AuthUserModule, 
-    BooksModule, 
+    AppRoutingModule,
+    HttpClientModule,
+    CoreModule,
+    AuthUserModule,
+    BooksModule,
     SharedModule
   ],
-  providers: [],
+  providers: [appInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

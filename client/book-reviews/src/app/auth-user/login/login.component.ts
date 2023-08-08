@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { emailValidator } from 'src/app/shared/emailValidatod';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +15,19 @@ export class LoginComponent {
     password: ["", Validators.required],
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   logUser(): void {
     if (this.form.invalid) {
       return;
     }
 
-    console.log(this.form.value);
+    const { email, password } = this.form.value;
 
+    this.authService.login(email!, password!).subscribe(() => {
+      this.router.navigate(['/']);
+    });
+
+    console.log(this.form.value);
   }
 }

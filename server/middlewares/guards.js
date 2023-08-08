@@ -1,4 +1,4 @@
-function hasuser() {
+function hasUser() {
     return (req, res, next) => {
         if (req.user) {
             next();
@@ -19,6 +19,6 @@ function isGuest() {
 }
 
 module.exports = {
-    hasuser,
+    hasUser,
     isGuest
 }

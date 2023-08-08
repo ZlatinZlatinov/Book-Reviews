@@ -30,10 +30,10 @@ const routes: Routes = [
     path: 'create',
     component: CreateComponent,
   },
-  {
-    path: 'details',
-    component: DetailsComponent,
-  },
+  // {
+  //   path: 'details',
+  //   component: DetailsComponent,
+  // },
   {
     path: 'login',
     component: LoginComponent,

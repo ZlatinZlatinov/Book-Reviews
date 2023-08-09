@@ -23,12 +23,22 @@ export class AuthService {
     return localStorage.getItem('auth_token')
   }
 
+  get username() {
+    return localStorage.getItem('username');
+  }
+
+  get userId() {
+    return localStorage.getItem('userId');
+  }
+
   login(email: string, password: string) {
     return this.http.post<User>('/api/auth/login', { email, password })
       .pipe(tap((response) => {
         this._isLoggedIn$.next(true);
         this._user$.next(response);
-        localStorage.setItem('auth_token', response.accessToken);
+        localStorage.setItem('auth_token', response.accessToken)
+        localStorage.setItem('username', response.username);
+        localStorage.setItem('userId', response._id);
       }));
   }
 
@@ -41,6 +51,8 @@ export class AuthService {
 
     return this.http.post<unknown>('/api/auth/logout', { token }).subscribe(() => {
       localStorage.removeItem('auth_token');
+      localStorage.removeItem('username');
+      localStorage.removeItem('userId');
       this._isLoggedIn$.next(false);
       this._user$.next(undefined);
     });

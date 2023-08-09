@@ -8,7 +8,7 @@
 				<figure *ngFor="let book of books" class="product-style">
 					<img src="{{book.img}}" alt="Books" class="product-item">
 					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">
-						<a [routerLink]="['catalog', book._id]">View
+						<a [routerLink]="['/catalog', book._id]">View
 							Details</a>
 					</button>
 					<figcaption>

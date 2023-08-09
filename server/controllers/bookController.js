@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const { erorParser } = require('../utils/erorParser');
 const { hasUser } = require('../middlewares/guards');
-const { loadAllBooks, createBook } = require('../services/bookService');
+const { loadAllBooks, createBook, getBookById } = require('../services/bookService');
 
 const bookController = require('express').Router();
 
@@ -29,14 +29,15 @@ bookController.post('/create',
         }
     });
 
-/*    
-catalogControler.get('/catalog/:id', async (req, res) => {
+
+bookController.get('/catalog/:id', async (req, res) => { 
+    //to do: add error handlig
     const id = req.params.id;
-    const item = await getItemById(id);
+    const item = await getBookById(id);
     res.json(item);
 
 });
-*/
+
 
 bookController.put('/edit', async (req, res) => {
 

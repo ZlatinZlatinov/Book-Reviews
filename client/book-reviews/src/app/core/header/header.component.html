@@ -12,7 +12,7 @@
                 <div class="col-md-6">
                     <div class="right-element">
                         <a *ngIf="authService.isLoggedIn$ | async" href="#" class="user-account for-buy"><i
-                                class="icon icon-user"></i><span>{{ username }}</span></a>
+                                class="icon icon-user"></i><span>{{ authService.username }}</span></a>
 
                         <div class="action-menu">
 

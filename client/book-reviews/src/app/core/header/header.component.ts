@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+//import { tap } from 'rxjs'
 import { AuthService } from 'src/app/auth-user/auth.service';
 
 @Component({
@@ -8,12 +9,10 @@ import { AuthService } from 'src/app/auth-user/auth.service';
 })
 export class HeaderComponent {
 
-  username: string | undefined = 'a'
-  constructor(public authService: AuthService) {
-    authService.user.subscribe((u) => this.username = u?.username);
-  }
+  constructor(public authService: AuthService) { }
 
-  signOut(){
+  signOut() {
     this.authService.logOut()
-  }
+  } 
+
 }

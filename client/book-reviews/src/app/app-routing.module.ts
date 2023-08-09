@@ -32,10 +32,10 @@ const routes: Routes = [
     canActivate: [AuthActivate],
     component: CreateComponent,
   },
-  // {
-  //   path: 'details',
-  //   component: DetailsComponent,
-  // },
+  {
+    path: 'catalog/:id',
+    component: DetailsComponent,
+  },
   {
     path: 'login',
     component: LoginComponent,

@@ -10,7 +10,7 @@ export class BooksService {
   constructor(private http: HttpClient) { }
 
   getBookById(id: string) {
-    return this.http.get('/api/books/catalog/' + id);
+    return this.http.get<Book>('/api/books/catalog/' + id);
   }
 
   getAllBooks() {

@@ -1,12 +1,15 @@
 import { Injectable, Provider } from "@angular/core";
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
 import { Observable, tap } from "rxjs";
+import { AuthService } from "./auth-user/auth.service";
 
 const apiUrl: string = 'http://localhost:3030';
 
 @Injectable()
 
 export class AppInterceptor implements HttpInterceptor {
+
+    constructor(private authService: AuthService) { }
 
     intercept(
         req: HttpRequest<any>,
@@ -15,8 +18,15 @@ export class AppInterceptor implements HttpInterceptor {
 
         if (req.url.startsWith('/api')) {
             req = req.clone({
-                url: req.url.replace('/api', apiUrl), 
-                withCredentials: true,  
+                url: req.url.replace('/api', apiUrl),
+                withCredentials: true,
+            })
+        }
+
+        if (req.url.startsWith('/token')) {
+            req = req.clone({
+                url: req.url.replace('/token', apiUrl),
+                headers: req.headers.set('x-authorization', this.authService.token!)
             })
         }
 

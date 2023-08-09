@@ -11,12 +11,16 @@ export class AuthService {
 
   private _isLoggedIn$ = new BehaviorSubject<boolean>(false);
   private _user$ = new BehaviorSubject<User | undefined>(undefined);
+
   user = this._user$.asObservable();
   isLoggedIn$ = this._isLoggedIn$.asObservable();
 
   constructor(private http: HttpClient) {
-    const token = localStorage.getItem('auth_token');
-    this._isLoggedIn$.next(!!token);
+    this._isLoggedIn$.next(!!this.token);
+  }
+
+  get token() {
+    return localStorage.getItem('auth_token')
   }
 
   login(email: string, password: string) {
@@ -33,8 +37,8 @@ export class AuthService {
   }
 
   logOut() {
-    let token;
-    this.user.subscribe((u) => token = u?.accessToken);
+    let token = this.token;
+
     return this.http.post<unknown>('/api/auth/logout', { token }).subscribe(() => {
       localStorage.removeItem('auth_token');
       this._isLoggedIn$.next(false);

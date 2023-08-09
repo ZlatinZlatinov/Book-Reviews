@@ -3,68 +3,21 @@
 		<div class="row">
 
 			<div class="products-grid grid">
+				<p *ngIf="!(books[0])">No books yet!</p>
 
-			  	<figure class="product-style">
-					<img src="/assets/images/product-item1.jpg" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
+				<figure *ngFor="let book of books" class="product-style">
+					<img src="{{book.img}}" alt="Books" class="product-item">
+					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">
+						<a [routerLink]="['catalog', book._id]">View
+							Details</a>
+					</button>
 					<figcaption>
-						<h3>Portrait photography</h3>
-						<p>Adam Silber</p>
-						<div class="item-price">$ 40.00</div>
+						<h3>{{book.title}}</h3>
+						<p>{{book.author}}</p>
 					</figcaption>
 				</figure>
 
-			  	<figure class="product-style">
-					<img src="/assets/images/product-item2.jpg" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-					<figcaption>
-						<h3>Once upon a time</h3>
-						<p>Klien Marry</p>
-						<div class="item-price">$ 35.00</div>
-					</figcaption>
-				</figure>
-
-			  	<figure class="product-style">
-					<img src="/assets/images/product-item3.jpg" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-					<figcaption>
-						<h3>Tips of simple lifestyle</h3>
-						<p>Bratt Smith</p>
-						<div class="item-price">$ 40.00</div>
-					</figcaption>
-				</figure>
-
-			  	<figure class="product-style">
-					<img src="/assets/images/product-item4.jpg" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-					<figcaption>
-						<h3>Just felt from outside</h3>
-						<p>Nicole Wilson</p>
-						<div class="item-price">$ 40.00</div>
-					</figcaption>
-				</figure>
-
-			  	<figure class="product-style">
-					<img src="/assets/images/product-item5.jpg" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-					<figcaption>
-						<h3>Peaceful Enlightment</h3>
-						<p>Marmik Lama</p>
-						<div class="item-price">$ 40.00</div>
-					</figcaption>
-				</figure>
-
-			  	<figure class="product-style">
-					<img src="/assets/images/product-item6.jpg" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">Add to Cart</button>
-					<figcaption>
-						<h3>Great travel at desert</h3>
-						<p>Sanchit Howdy</p>
-						<div class="item-price">$ 40.00</div>
-					</figcaption>
-				</figure>
-
-	    	</div>
+			</div>
 
 		</div>
 	</div>

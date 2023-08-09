@@ -1,9 +1,23 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Book } from './bookType';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getBookById(id: string) {
+    return this.http.get('/api/books/catalog/' + id);
+  }
+
+  getAllBooks() {
+    return this.http.get<Book[]>('/api/books/catalog');
+  }
+
+  createBook(title: string, author: string, genre: string, img: string, review: string) {
+    return this.http.post<Book>('/token/books/create', { title, author, genre, img, review });
+  }
 }

@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './create/create.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { DetailsComponent } from './details/details.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -16,7 +17,8 @@ import { DetailsComponent } from './details/details.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
+    RouterModule
   ],
   exports: [
     CreateComponent,

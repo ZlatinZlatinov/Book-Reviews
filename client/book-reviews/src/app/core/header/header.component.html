@@ -11,8 +11,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="right-element">
-                        <a href="#" class="user-account for-buy"><i
-                                class="icon icon-user"></i><span>Account</span></a>
+                        <a *ngIf="authService.isLoggedIn$ | async" href="#" class="user-account for-buy"><i
+                                class="icon icon-user"></i><span>{{ username }}</span></a>
 
                         <div class="action-menu">
 
@@ -21,8 +21,7 @@
                                     <i class="icon icon-search"></i>
                                 </a>
                                 <form role="search" method="get" class="search-box">
-                                    <input class="search-field text search-input" placeholder="Search"
-                                        type="search">
+                                    <input class="search-field text search-input" placeholder="Search" type="search">
                                 </form>
                             </div>
                         </div>
@@ -45,17 +44,25 @@
                     <nav id="navbar">
                         <div class="main-menu stellarnav">
                             <ul class="menu-list">
-                                <li class="menu-item active"><a routerLink="/home" data-effect="Home">Home</a></li>
-                                <li class="menu-item"><a routerLink="/about" class="nav-link"
-                                        data-effect="About">About</a></li>
-                                <li class="menu-item"><a routerLink="/create" class="nav-link"
-                                        data-effect="About">Create</a></li>
-                                <li class="menu-item"><a routerLink="/catalog" class="nav-link"
-                                        data-effect="Shop">Catalog</a></li>
-                                <li class="menu-item"><a routerLink="/login" class="nav-link"
-                                        data-effect="Articles">Login</a></li>
-                                <li class="menu-item"><a routerLink="/register" class="nav-link"
-                                        data-effect="Contact">Register</a></li>
+                                <ng-container>
+                                    <li class="menu-item active"><a routerLink="/home" data-effect="Home">Home</a></li>
+                                    <li class="menu-item"><a routerLink="/about" class="nav-link"
+                                            data-effect="About">About</a></li>
+                                    <li *ngIf="authService.isLoggedIn$ | async" class="menu-item"><a
+                                            routerLink="/create" class="nav-link" data-effect="About">Create</a></li>
+                                    <li class="menu-item"><a routerLink="/catalog" class="nav-link"
+                                            data-effect="Shop">Catalog</a></li>
+                                </ng-container>
+                                <ng-container *ngIf="!(authService.isLoggedIn$ | async)" class="menu-item">
+                                    <li class="menu-item"><a routerLink="/login" class="nav-link"
+                                            data-effect="Articles">Login</a></li>
+                                    <li class="menu-item"><a routerLink="/register" class="nav-link"
+                                            data-effect="Contact">Register</a></li>
+                                </ng-container>
+                                <ng-container *ngIf="authService.isLoggedIn$ | async" class="menu-item">
+                                    <li class="menu-item"><a routerLink="/logout" class="nav-link" data-effect="Contact"
+                                            (click)="signOut()">Logout</a></li>
+                                </ng-container>
                             </ul>
 
                             <div class="hamburger">

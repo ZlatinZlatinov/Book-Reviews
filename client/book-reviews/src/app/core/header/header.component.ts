@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/auth-user/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  username: string | undefined = 'a'
+  constructor(public authService: AuthService) {
+    authService.user.subscribe((u) => this.username = u?.username);
+  }
+
+  signOut(){
+    this.authService.logOut()
+  }
 }

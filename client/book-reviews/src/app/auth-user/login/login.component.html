@@ -21,7 +21,7 @@
 			<span class="error" *ngIf="form.get('password')?.errors?.['required']">Password is required!</span>
 		</ng-container>
 
-		<input type="submit" value="Login" class="btn" disabled="!form.ivalid">
+		<input type="submit" value="Login" class="btn">
 		<p>Don't have an account ? <a routerLink="/register">Create one</a></p>
 	</form>
 </section>

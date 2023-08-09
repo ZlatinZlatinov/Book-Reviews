@@ -41,6 +41,11 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  }, 
+  {
+    path: 'logout',
+    pathMatch: 'full',
+    redirectTo: '/home',
   }
 ];
 

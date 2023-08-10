@@ -20,4 +20,12 @@ export class BooksService {
   createBook(title: string, author: string, genre: string, img: string, review: string) {
     return this.http.post<Book>('/token/books/create', { title, author, genre, img, review });
   }
+
+  deleteBook(id: string) {
+    console.log(id);
+
+    return this.http.delete<any>('/token/books/delete/' + id, {
+      headers: { ['Content-Type']: 'application/json' }
+    });
+  }
 }

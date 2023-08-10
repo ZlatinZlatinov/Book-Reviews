@@ -10,18 +10,19 @@
             <div class="col-md-6 pl-5">
                 <div class="product-detail">
                     <h1>{{book?.title}}</h1>
-                    <p>{{book?.author}}</p>
+                    <p>Author: {{book?.author}}</p>
                     <span class="price colored">Likes: {{book?.likes?.length}}</span>
 
                     <p>{{book?.review}}</p>
 
-                    <div *ngIf="authService.isLoggedIn$">
+                    <div *ngIf="authService.isLoggedIn$ | async" class="social-btns">
                         <button *ngIf="!(isOwner)" name="add-to-cart" class="button btn-rounded">Add to
                             favorites</button>
+                        <button *ngIf="!(isOwner)" name="add-to-cart" class="button btn-rounded">Like</button>
 
                         <ng-container *ngIf="isOwner">
                             <button class="button btn-rounded">Edit</button>
-                            <button class="button btn-rounded">Delete</button>
+                            <button (click)="deleteBook()" class="button btn-rounded">Delete</button>
                         </ng-container>
                     </div>
 
@@ -29,7 +30,7 @@
             </div>
 
             <!--Comments-->
-            <div *ngIf="authService.isLoggedIn$" class="col-md-10">
+            <div *ngIf="authService.isLoggedIn$ | async" class="col-md-10">
                 <hr>
                 <!--User Comments-->
                 <section class="comments-wrap mb-4">

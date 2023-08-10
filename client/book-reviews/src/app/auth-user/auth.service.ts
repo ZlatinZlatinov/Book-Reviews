@@ -33,7 +33,10 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<User>('/api/auth/login', { email, password })
-      .pipe(tap((response) => {
+      .pipe(tap((response) => { 
+        //console.error(response);
+        
+
         this._isLoggedIn$.next(true);
         this._user$.next(response);
         localStorage.setItem('auth_token', response.accessToken)

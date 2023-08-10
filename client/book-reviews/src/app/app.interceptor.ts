@@ -1,6 +1,6 @@
 import { Injectable, Provider } from "@angular/core";
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
-import { Observable, tap } from "rxjs";
+import { Observable, catchError, tap } from "rxjs";
 import { AuthService } from "./auth-user/auth.service";
 
 const apiUrl: string = 'http://localhost:3030';
@@ -19,7 +19,7 @@ export class AppInterceptor implements HttpInterceptor {
         if (req.url.startsWith('/api')) {
             req = req.clone({
                 url: req.url.replace('/api', apiUrl),
-                withCredentials: true,
+                //withCredentials: true,
             })
         }
 
@@ -30,7 +30,16 @@ export class AppInterceptor implements HttpInterceptor {
             })
         }
 
-        return next.handle(req).pipe(tap()); // da amaa nee...
+        return next.handle(req).pipe(
+            catchError((err) => { 
+                console.log(err);
+                
+                window.alert(err.error.message);
+
+                return [err];
+            })
+
+        ); // da amaa nee...
     }
 }
 

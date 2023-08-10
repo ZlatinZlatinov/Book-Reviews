@@ -1,7 +1,8 @@
 const { body, validationResult } = require('express-validator');
 const { erorParser } = require('../utils/erorParser');
 const { hasUser } = require('../middlewares/guards');
-const { loadAllBooks, createBook, getBookById } = require('../services/bookService');
+const { loadAllBooks, createBook, getBookById, deleteBook } = require('../services/bookService');
+const { addToFavorites } = require('../services/userService');
 
 const bookController = require('express').Router();
 
@@ -20,7 +21,7 @@ bookController.post('/create',
                 throw errors;
             }
 
-            const data = Object.assign({ ownerId: req.user._id }, req.body);
+            const data = Object.assign({ ownerId: req.user.id }, req.body);
             const createdItem = await createBook(data);
             res.status(201).json(createdItem);
         } catch (err) {
@@ -30,20 +31,45 @@ bookController.post('/create',
     });
 
 
-bookController.get('/catalog/:id', async (req, res) => { 
+bookController.get('/catalog/:id', async (req, res) => {
     //to do: add error handlig
     const id = req.params.id;
-    const item = await getBookById(id);
-    res.json(item);
+    try {
+        const item = await getBookById(id);
+        res.json(item);
 
+    } catch (err) {
+        res.status(404).json({ message: 'No such book!' });
+    }
 });
 
 
-bookController.put('/edit', async (req, res) => {
+bookController.put('/edit', hasUser(), async (req, res) => {
 
 });
 
-bookController.delete('/delete', async (req, res) => {
+bookController.delete('/delete/:id', hasUser(), async (req, res) => {
+    const id = req.params.id;
+    
+    try {
+        await deleteBook(id);
+        res.status(204).json({ message: 'Book deleted!' });
+    } catch (err) {
+        res.status(404).json({ message: 'No such book!' });
+    }
+});
+
+
+bookController.post('/favorites/:id', hasUser(), async (req, res) => {
+    const bookId = req.params.id;
+    const userId = req.user._id;
+
+    try {
+        await addToFavorites(bookId, userId);
+        res.status(200).json({ message: 'Book added Successfully!' })
+    } catch (err) {
+        res.status(400).json({ message: 'No such book ot user!' });
+    }
 
 });
 

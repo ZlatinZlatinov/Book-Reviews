@@ -17,7 +17,7 @@ async function createBook(data) {
     const today = new Date();
     const createdAt = today.getDate();
     const payload = { ...data, createdAt };
-
+    console.log(payload);
     return Book.create(payload);
 }
 
@@ -26,8 +26,8 @@ async function updateBook() {
 }
 
 async function deleteBook(id) {
-    Book.findByIdAndDelete(id).then();
-}
+    return Book.findByIdAndDelete(id).then();
+} 
 
 module.exports = {
     loadAllBooks,

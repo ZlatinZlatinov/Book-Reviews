@@ -7,10 +7,11 @@
 
 				<figure *ngFor="let book of books" class="product-style">
 					<img src="{{book.img}}" alt="Books" class="product-item">
-					<button type="button" class="add-to-cart" data-product-tile="add-to-cart">
-						<a [routerLink]="['/catalog', book._id]">View
-							Details</a>
-					</button>
+					<a [routerLink]="['/catalog', book._id]">
+						<button type="button" class="add-to-cart" data-product-tile="add-to-cart">
+							ViewDetails
+						</button>
+					</a>
 					<figcaption>
 						<h3>{{book.title}}</h3>
 						<p>{{book.author}}</p>

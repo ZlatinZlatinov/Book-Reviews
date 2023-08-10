@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const { erorParser } = require('../utils/erorParser');
 const { hasUser } = require('../middlewares/guards');
-const { loadAllBooks, createBook, getBookById, deleteBook } = require('../services/bookService');
+const { loadAllBooks, createBook, getBookById, deleteBook, likeBook } = require('../services/bookService');
 const { addToFavorites } = require('../services/userService');
 
 const bookController = require('express').Router();
@@ -50,7 +50,7 @@ bookController.put('/edit', hasUser(), async (req, res) => {
 
 bookController.delete('/delete/:id', hasUser(), async (req, res) => {
     const id = req.params.id;
-    
+
     try {
         await deleteBook(id);
         res.status(204).json({ message: 'Book deleted!' });
@@ -60,17 +60,29 @@ bookController.delete('/delete/:id', hasUser(), async (req, res) => {
 });
 
 
-bookController.post('/favorites/:id', hasUser(), async (req, res) => {
-    const bookId = req.params.id;
-    const userId = req.user._id;
+bookController.post('/favorites', hasUser(), async (req, res) => {
+    const bookId = req.body.bookId;
+    const userId = req.user.id;
 
     try {
         await addToFavorites(bookId, userId);
         res.status(200).json({ message: 'Book added Successfully!' })
     } catch (err) {
-        res.status(400).json({ message: 'No such book ot user!' });
+        res.status(400).json({ message: err.message });
     }
 
+});
+
+bookController.post('/likes', hasUser(), async (req, res) => {
+    const bookId = req.body.bookId;
+    const userId = req.user.id;
+
+    try {
+        await likeBook(bookId, userId);
+        res.json({ message: 'Book successfuly liked!' });
+    } catch (err) {
+        res.status(403).json({ message: err.message });
+    }
 });
 
 module.exports = bookController;

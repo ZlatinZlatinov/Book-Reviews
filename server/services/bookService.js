@@ -17,7 +17,7 @@ async function createBook(data) {
     const today = new Date();
     const createdAt = today.getDate();
     const payload = { ...data, createdAt };
-    console.log(payload);
+
     return Book.create(payload);
 }
 
@@ -27,7 +27,20 @@ async function updateBook() {
 
 async function deleteBook(id) {
     return Book.findByIdAndDelete(id).then();
-} 
+}
+
+async function likeBook(bookId, userId) {
+    const book = await Book.findById(bookId);
+
+    if (book.likes.includes(userId)) {
+        throw new Error('You have already liked this book!');
+    }
+
+    book.likes.push(userId);
+
+    return book.save();
+
+}
 
 module.exports = {
     loadAllBooks,
@@ -35,5 +48,6 @@ module.exports = {
     getBookByName,
     createBook,
     updateBook,
-    deleteBook
+    deleteBook,
+    likeBook
 }

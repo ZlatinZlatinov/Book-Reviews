@@ -1,4 +1,9 @@
 div.social-btns .btn-rounded {
-    margin-right: 10px; 
+    margin-right: 10px;
     border-radius: 5px;
+}
+
+div.details-img {
+    max-width: 500px;
+    max-height: 700px;
 }

@@ -74,7 +74,7 @@ async function addToFavorites(bookId, userId) {
     const user = await User.findById(userId);
 
     if (user.favorites.includes(bookId)) {
-        throw new Error('You have already added this book to your favourites list!')
+        throw new Error('You have already added this book to your favorites list!')
     }
 
     user.favorites.push(bookId);

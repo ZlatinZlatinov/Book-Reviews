@@ -11,13 +11,20 @@
                 </div>
                 <div class="col-md-6">
                     <div class="right-element">
-                        <a *ngIf="authService.isLoggedIn$ | async" href="#" class="user-account for-buy"><i
-                                class="icon icon-user"></i><span>{{ authService.username }}</span></a>
+                        
+                        <div *ngIf="authService.isLoggedIn$ | async" class="dropdown"> 
+                            <span>Welcome, {{ authService.username }}</span>
+                            <button class="dropbtn">&#x25BC;</button>
+                            <div class="dropdown-content">
+                                <a href="#">Link 1</a>
+                                <a href="#">Link 2</a>
+                            </div>
+                        </div>
 
                         <div class="action-menu">
 
                             <div class="search-bar">
-                                <a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+                                <a href="#" class="search-button search-toggle active" data-selector="#header-wrap">
                                     <i class="icon icon-search"></i>
                                 </a>
                                 <form role="search" method="get" class="search-box">

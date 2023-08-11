@@ -1,10 +1,11 @@
 <h3 id="catalog-title">My Favorites List</h3>
+
 <section class="padding-large">
+	<p *ngIf="!(books[0])" class="center-p">You have no favorites boks yet!</p>
 	<div class="container">
 		<div class="row">
 
 			<div class="products-grid grid">
-				<p *ngIf="!(books[0])">You have no favorites boks yet!</p>
 
 				<figure *ngFor="let book of books" class="product-style">
 					<img src="{{book.img}}" alt="Books" class="product-item">

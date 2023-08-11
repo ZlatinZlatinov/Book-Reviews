@@ -1,5 +1,6 @@
 // TODO: require the item:  
 const Book = require('../models/Book');
+const { createComment } = require('./commentsService');
 
 async function loadAllBooks() {
     return Book.find({}).lean();
@@ -10,7 +11,7 @@ async function getBookByName(name) {
 }
 
 async function getBookById(id) {
-    return Book.findById(id);
+    return Book.findById(id).populate('comments');
 }
 
 async function createBook(data) {
@@ -42,6 +43,22 @@ async function likeBook(bookId, userId) {
 
 }
 
+async function commentBook(bookId, commentData) {
+    const book = await getBookById(bookId);
+    const comment = await createComment(commentData);
+
+    book.comments.push(comment._id);
+    await book.save();
+
+    return comment;
+}
+
+async function getBookComments(bookId) {
+    const book = await getBookById(bookId);
+
+    return book.comments;
+}
+
 module.exports = {
     loadAllBooks,
     getBookById,
@@ -49,5 +66,7 @@ module.exports = {
     createBook,
     updateBook,
     deleteBook,
-    likeBook
+    likeBook,
+    commentBook, 
+    getBookComments
 }

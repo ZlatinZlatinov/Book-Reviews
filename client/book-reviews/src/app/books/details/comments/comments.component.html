@@ -1,0 +1,48 @@
+<div class="col-md-10">
+    <hr>
+    <!--User Comments-->
+    <section class="comments-wrap mb-4">
+        <h3>Comments</h3>
+        <div class="comment-list mt-4">
+
+            <p *ngIf="!(commentsArray[0])">No comments yet!</p>
+
+            <article *ngFor="let comment of commentsArray" class="flex-container d-flex mb-3">
+                <div class="author-post">
+
+                    <div class="comment-meta d-flex">
+                        <h4><img src="/assets/images/user.png" alt="default" class="commentorImg">&emsp;
+                            {{comment.ownerName}}
+                        </h4>
+                        <span class="meta-date">{{comment.createdAt}}</span>
+                    </div><!--meta-tags-->
+
+                    <p>{{comment.text}}</p>
+                </div>
+
+            </article><!--flex-container-->
+
+        </div><!--comment-list-->
+
+    </section>
+
+    <!--Submit Comment-->
+    <section class="comment-respond  mb-5">
+        <h3>Leave a Comment</h3>
+        <form [formGroup]="form" (ngSubmit)="comment()" class="form-group mt-3">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <textarea formControlName="text" class="u-full-width" id="comment" class="form-control mb-4"
+                        name="comment" placeholder="Write your comment here" rows="20" cols="60"></textarea>
+                </div>
+
+                <div class="col-md-12">
+                    <input class="btn btn-rounded btn-large" type="submit" value="Comment">
+                </div>
+            </div>
+
+        </form>
+    </section>
+
+</div>

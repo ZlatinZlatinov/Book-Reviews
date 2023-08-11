@@ -32,69 +32,7 @@
             </div>
 
             <!--Comments-->
-            <div *ngIf="authService.isLoggedIn$ | async" class="col-md-10">
-                <hr>
-                <!--User Comments-->
-                <section class="comments-wrap mb-4">
-                    <h3>Comments</h3>
-                    <div class="comment-list mt-4">
-
-                        <article class="flex-container d-flex mb-3">
-                            <img src="/assets/images/johncena.png" alt="default" class="commentorImg">
-                            <div class="author-post">
-                                <div class="comment-meta d-flex">
-                                    <h4>Michael Watson</h4>
-                                    <span class="meta-date">Dec 2,2020</span>
-                                </div><!--meta-tags-->
-
-                                <p>Tristique tempis condimentum diam done ullancomroer sit element henddg sit he
-                                    consequert.Tristique tempis condimentum diam done ullancomroer sit element henddg
-                                    sit he consequert.</p>
-                            </div>
-
-                        </article><!--flex-container-->
-
-                        <div class="child-comments">
-                            <article class="flex-container d-flex">
-                                <img src="/assets/images/johncena.png" alt="sara" class="commentorImg">
-                                <div class="author-post">
-                                    <div class="comment-meta d-flex">
-                                        <h4>Chris Gyale</h4>
-                                        <span class="meta-date">Dec 3,2020</span>
-                                    </div><!--meta-tags-->
-
-                                    <p>Lorem diam done ullancomroer sit element henddg sit he consequert.Tristique
-                                        tempis condimentum diam done ullancomroer sit element henddg sit he consequert.
-                                    </p>
-                                </div>
-
-                            </article><!--flex-container-->
-                        </div><!--child-comments-->
-
-                    </div><!--comment-list-->
-
-                </section>
-
-                <!--Submit Comment-->
-                <section class="comment-respond  mb-5">
-                    <h3>Leave a Comment</h3>
-                    <form method="post" class="form-group mt-3">
-
-                        <div class="row">
-                            <div class="col-md-12">
-                                <textarea class="u-full-width" id="comment" class="form-control mb-4" name="comment"
-                                    placeholder="Write your comment here" rows="20" cols="60"></textarea>
-                            </div>
-
-                            <div class="col-md-12">
-                                <input class="btn btn-rounded btn-large" type="submit" value="Comment">
-                            </div>
-                        </div>
-
-                    </form>
-                </section>
-
-            </div>
+            <app-comments *ngIf="authService.isLoggedIn$ | async" [bookId]="bookId"/>
 
         </div>
     </div>

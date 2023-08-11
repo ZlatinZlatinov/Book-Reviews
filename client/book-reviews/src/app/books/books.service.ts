@@ -24,10 +24,7 @@ export class BooksService {
   }
 
   deleteBook(id: string) {
-
-    return this.http.delete<any>('/token/books/delete/' + id, {
-      headers: { ['Content-Type']: 'application/json' }
-    });
+    return this.http.delete<any>('/token/books/delete/' + id);
   }
 
   addBookToUserFavorites(bookId: string) {

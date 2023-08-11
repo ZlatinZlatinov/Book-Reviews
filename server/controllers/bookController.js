@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const { erorParser } = require('../utils/erorParser');
 const { hasUser } = require('../middlewares/guards');
-const { loadAllBooks, createBook, getBookById, deleteBook, likeBook } = require('../services/bookService');
+const { loadAllBooks, createBook, getBookById, deleteBook, likeBook, commentBook, getBookComments } = require('../services/bookService');
 const { addToFavorites } = require('../services/userService');
 
 const bookController = require('express').Router();
@@ -32,7 +32,6 @@ bookController.post('/create',
 
 
 bookController.get('/catalog/:id', async (req, res) => {
-    //to do: add error handlig
     const id = req.params.id;
     try {
         const item = await getBookById(id);
@@ -84,5 +83,34 @@ bookController.post('/likes', hasUser(), async (req, res) => {
         res.status(403).json({ message: err.message });
     }
 });
+
+bookController.post('/comments', hasUser(), async (req, res) => {
+    const bookId = req.body.bookId;
+    const text = req.body.text;
+
+    const ownerId = req.user.id;
+    const ownerName = req.user.username;
+
+    try {
+        const comment = await commentBook(bookId, { ownerId, ownerName, text });
+        res.json(comment);
+
+    } catch (err) {
+        const message = erorParser(err);
+        res.status(406).json({ message });
+    }
+})
+
+bookController.get('/comments/:id', async (req, res) => {
+    const bookId = req.params.id;
+
+    try {
+        const comments = await getBookComments(bookId);
+        res.json(comments);
+
+    } catch (err) {
+        res.status(404).json({ message: 'No Comments!' });
+    }
+})
 
 module.exports = bookController;

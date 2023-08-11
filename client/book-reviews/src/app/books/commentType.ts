@@ -1,5 +1,7 @@
 export interface Comment {
+    _id: string,
     text: string,
-    createdAt: string,
+    createdAt: string, 
+    ownerName: string,
     ownerId: string
 }

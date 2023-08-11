@@ -6,6 +6,7 @@ import { CreateComponent } from './create/create.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { DetailsComponent } from './details/details.component';
 import { RouterModule } from '@angular/router';
+import { CommentsComponent } from './details/comments/comments.component';
 
 
 
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
   declarations: [
     CreateComponent,
     CatalogComponent,
-    DetailsComponent
+    DetailsComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,

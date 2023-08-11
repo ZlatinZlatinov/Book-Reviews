@@ -26,7 +26,12 @@ export class AppInterceptor implements HttpInterceptor {
         if (req.url.startsWith('/token')) {
             req = req.clone({
                 url: req.url.replace('/token', apiUrl),
-                headers: req.headers.set('x-authorization', this.authService.token!)
+                setHeaders: {
+                    'Content-Type': 'application/json',
+                    'X-Authorization': this.authService.token! 
+                }
+                     
+                //headers: req.headers.set('x-authorization', this.authService.token!)
             })
         }
 
@@ -34,12 +39,11 @@ export class AppInterceptor implements HttpInterceptor {
             catchError((err) => { 
                 console.log(err);
                 
-                window.alert(err.error.message);
+                window.alert(err.error.message || err.message);
 
                 return [err];
             })
-
-        ); // da amaa nee...
+        );
     }
 }
 

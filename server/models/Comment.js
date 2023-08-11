@@ -6,6 +6,10 @@ const commentSchema = new Schema({
         required: true
     },
     createdAt: {
+        type: Number,
+        required: true
+    },
+    ownerName: {
         type: String,
         required: true
     },

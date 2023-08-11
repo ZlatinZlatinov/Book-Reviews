@@ -1,3 +1,6 @@
+import { Comment } from "./commentType";
+
+
 export interface Book {
     _id: string,
     title: string,
@@ -7,6 +10,6 @@ export interface Book {
     review: string,
     createdAt: string,
     likes: string[],
-    comments: Comment[],
+    comments: Comment,
     ownerId: string
 }

@@ -54,7 +54,7 @@
             </ng-container>
 
         </ng-container>
-        <input type="submit" value="Register" class="btn">
+        <input type="submit" value="Register" class="btn" [disabled]="form.invalid">
         <p>Have an account ? <a routerLink='/login'>Click here</a></p>
     </form>
 </section>

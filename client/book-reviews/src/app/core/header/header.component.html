@@ -11,9 +11,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="right-element">
-                        
-                        <div *ngIf="authService.isLoggedIn$ | async" class="dropdown"> 
-                            <span>Welcome, {{ authService.username }}</span>
+
+                        <div *ngIf="authService.isLoggedIn$ | async" class="dropdown">
+                            <span>Welcome, {{ authService.username | titlecase }}</span>
                             <button class="dropbtn">&#x25BC;</button>
                             <div class="dropdown-content">
                                 <a href="#">Link 1</a>
@@ -51,6 +51,7 @@
                     <nav id="navbar">
                         <div class="main-menu stellarnav">
                             <ul class="menu-list">
+
                                 <ng-container>
                                     <li class="menu-item active"><a routerLink="/home" data-effect="Home">Home</a></li>
                                     <li class="menu-item"><a routerLink="/about" class="nav-link"
@@ -60,12 +61,14 @@
                                     <li class="menu-item"><a routerLink="/catalog" class="nav-link"
                                             data-effect="Shop">Catalog</a></li>
                                 </ng-container>
+
                                 <ng-container *ngIf="!(authService.isLoggedIn$ | async)" class="menu-item">
                                     <li class="menu-item"><a routerLink="/login" class="nav-link"
                                             data-effect="Articles">Login</a></li>
                                     <li class="menu-item"><a routerLink="/register" class="nav-link"
                                             data-effect="Contact">Register</a></li>
                                 </ng-container>
+
                                 <ng-container *ngIf="authService.isLoggedIn$ | async" class="menu-item">
                                     <li class="menu-item"><a routerLink="/logout" class="nav-link" data-effect="Contact"
                                             (click)="signOut()">Logout</a></li>

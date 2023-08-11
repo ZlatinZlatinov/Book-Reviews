@@ -3,6 +3,7 @@ import { Book } from '../bookType';
 import { BooksService } from '../books.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth-user/auth.service';
+import { Comment } from '../commentType';
 
 
 @Component({
@@ -12,9 +13,9 @@ import { AuthService } from 'src/app/auth-user/auth.service';
 })
 
 export class DetailsComponent implements OnInit, OnDestroy {
-  book: Book | undefined = undefined;
+  book: Book | undefined;
   isOwner: boolean = false;
-  bookId: string = '';
+  bookId: string = ''; 
 
   constructor(
     private bookService: BooksService,
@@ -24,11 +25,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.bookId = this.route.snapshot.params['id'];
-
+    this.bookId = this.route.snapshot.params['id']; 
+    
     this.bookService.getBookById(this.bookId)
-      .subscribe((response) => {
-        this.book = response;
+    .subscribe((response) => {
+      this.book = response;
+      
 
         if (response.ownerId === this.authService.userId) {
           this.isOwner = true;

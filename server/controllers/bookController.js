@@ -1,8 +1,12 @@
 const { body, validationResult } = require('express-validator');
 const { erorParser } = require('../utils/erorParser');
 const { hasUser } = require('../middlewares/guards');
-const { loadAllBooks, createBook, getBookById, deleteBook, likeBook, commentBook, getBookComments, updateBook } = require('../services/bookService');
-const { addToFavorites } = require('../services/userService');
+const {
+    loadAllBooks, createBook, getBookById,
+    deleteBook, likeBook, commentBook,
+    getBookComments, updateBook
+} = require('../services/bookService');
+const { addToFavorites, getUserFavorites } = require('../services/userService');
 
 const bookController = require('express').Router();
 
@@ -118,6 +122,18 @@ bookController.get('/comments/:id', async (req, res) => {
 
     } catch (err) {
         res.status(404).json({ message: 'No Comments!' });
+    }
+})
+
+bookController.get('/favorites', hasUser(), async (req, res) => {
+    const userId = req.user.id;
+
+    try {
+        const favoritesArray = await getUserFavorites(userId);
+        res.json(favoritesArray);
+    } catch (err) {
+        const message = erorParser(err);
+        res.status(404).json({ message });
     }
 })
 

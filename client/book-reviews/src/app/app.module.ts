@@ -11,6 +11,7 @@ import { BooksModule } from './books/books.module';
 import { SharedModule } from './shared/shared.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { HttpClientModule } from '@angular/common/http';
+import { UserFavoritesModule } from './user-favorites/user-favorites.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     AuthUserModule,
     BooksModule,
-    SharedModule
+    SharedModule, 
+    UserFavoritesModule
   ],
   providers: [appInterceptorProvider],
   bootstrap: [AppComponent]

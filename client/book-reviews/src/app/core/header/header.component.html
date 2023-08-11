@@ -10,26 +10,25 @@
 
                 </div>
                 <div class="col-md-6">
-                    <div class="right-element">
+                    <div id="position-right" class="right-element">
+
+                        <div class="action-menu">
+                            <div id="input-search" class="search-bar">
+                                <span class="search-button active">
+                                    <i class="icon icon-search"></i>
+                                </span>
+                                <form class="search-box">
+                                    <input class="search-field text search-input" placeholder="Search..." type="search">
+
+                                </form>
+                            </div>
+                        </div>
 
                         <div *ngIf="authService.isLoggedIn$ | async" class="dropdown">
                             <span>Welcome, {{ authService.username | titlecase }}</span>
                             <button class="dropbtn">&#x25BC;</button>
                             <div class="dropdown-content">
-                                <a href="#">Link 1</a>
-                                <a href="#">Link 2</a>
-                            </div>
-                        </div>
-
-                        <div class="action-menu">
-
-                            <div class="search-bar">
-                                <a href="#" class="search-button search-toggle active" data-selector="#header-wrap">
-                                    <i class="icon icon-search"></i>
-                                </a>
-                                <form role="search" method="get" class="search-box">
-                                    <input class="search-field text search-input" placeholder="Search" type="search">
-                                </form>
+                                <a routerLink="/my-favorites">My Favorites List</a>
                             </div>
                         </div>
 

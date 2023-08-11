@@ -82,10 +82,17 @@ async function addToFavorites(bookId, userId) {
     await user.save();
 }
 
+async function getUserFavorites(userId) {
+    const user = await User.findById(userId).populate('favorites');
+
+    return user.favorites;
+}
+
 module.exports = {
     register,
     login,
     logout,
     pareseToken,
-    addToFavorites
+    addToFavorites,
+    getUserFavorites
 }

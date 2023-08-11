@@ -1,0 +1,26 @@
+<h3 id="catalog-title">My Favorites List</h3>
+<section class="padding-large">
+	<div class="container">
+		<div class="row">
+
+			<div class="products-grid grid">
+				<p *ngIf="!(books[0])">You have no favorites boks yet!</p>
+
+				<figure *ngFor="let book of books" class="product-style">
+					<img src="{{book.img}}" alt="Books" class="product-item">
+					<a [routerLink]="['/catalog', book._id]">
+						<button type="button" class="add-to-cart" data-product-tile="add-to-cart">
+							ViewDetails
+						</button>
+					</a>
+					<figcaption>
+						<h3>{{book.title}}</h3>
+						<p>{{book.author}}</p>
+					</figcaption>
+				</figure>
+
+			</div>
+
+		</div>
+	</div>
+</section>

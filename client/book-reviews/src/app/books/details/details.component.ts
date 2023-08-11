@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, Renderer2, SimpleChanges } from '@angular/core';
 import { Book } from '../bookType';
 import { BooksService } from '../books.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth-user/auth.service';
-import { Comment } from '../commentType';
+import { FormBuilder, Validators } from '@angular/forms';
+import { imageValidator } from 'src/app/shared/imageValidator';
 
 
 @Component({
@@ -15,22 +16,32 @@ import { Comment } from '../commentType';
 export class DetailsComponent implements OnInit, OnDestroy {
   book: Book | undefined;
   isOwner: boolean = false;
-  bookId: string = ''; 
+  bookId: string = '';
+  toggleEditView: boolean = false;
+
+  form = this.fb.group({
+    title: ["", [Validators.required, Validators.minLength(3)]],
+    author: ["", [Validators.required, Validators.minLength(5)]],
+    genre: ["", [Validators.required, Validators.minLength(4)]],
+    img: ["", [Validators.required, Validators.maxLength(250), imageValidator('img')]],
+    review: ["", [Validators.required, Validators.minLength(20)]],
+  })
 
   constructor(
     private bookService: BooksService,
     private route: ActivatedRoute,
     public authService: AuthService,
-    private router: Router
+    private router: Router,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.bookId = this.route.snapshot.params['id']; 
-    
+    this.bookId = this.route.snapshot.params['id'];
+
     this.bookService.getBookById(this.bookId)
-    .subscribe((response) => {
-      this.book = response;
-      
+      .subscribe((response) => {
+        this.book = response;
+
 
         if (response.ownerId === this.authService.userId) {
           this.isOwner = true;
@@ -56,6 +67,23 @@ export class DetailsComponent implements OnInit, OnDestroy {
       .subscribe(() => this.router.navigate(['catalog']));
   }
 
+  editBook() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const { title, author, genre, img, review } = this.form.value;
+
+    this.bookService.editBook(this.bookId, title!, author!, genre!, img!, review!)
+      .subscribe((b) => {
+        this.book = b
+        this.toggleEdit();
+      });
+  }
+
+  toggleEdit() {
+    this.toggleEditView = !this.toggleEditView;
+  }
 
   ngOnDestroy(): void {
     this.book = undefined;

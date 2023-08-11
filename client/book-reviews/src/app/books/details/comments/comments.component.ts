@@ -13,6 +13,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
   @Input() bookId: string = '';
 
   commentsArray: Comment[] = [];
+  time: string = '';
 
   form = this.fb.group({
     text: ["", [Validators.required]]
@@ -37,6 +38,11 @@ export class CommentsComponent implements OnInit, OnDestroy {
     })
 
     this.form.value.text = '';
+  }
+
+  numToDate(num: number) {
+    let date = new Date(num);
+    return (date.toUTCString().split(' ').slice(0, 4).join(' '));
   }
 
   ngOnDestroy(): void {

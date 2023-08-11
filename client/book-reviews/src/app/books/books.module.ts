@@ -9,13 +9,12 @@ import { RouterModule } from '@angular/router';
 import { CommentsComponent } from './details/comments/comments.component';
 
 
-
 @NgModule({
   declarations: [
     CreateComponent,
     CatalogComponent,
     DetailsComponent,
-    CommentsComponent
+    CommentsComponent,
   ],
   imports: [
     CommonModule,

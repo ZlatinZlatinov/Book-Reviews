@@ -22,8 +22,16 @@ async function createBook(data) {
     return Book.create(payload);
 }
 
-async function updateBook() {
-    //Book.findById(it).then((itmem) => { ... item.save()});
+async function updateBook(bookId, payload) {
+    return Book.findById(bookId).then((book) => {
+        book.title = payload.title;
+        book.author = payload.author;
+        book.genre = payload.genre;
+        book.img = payload.img;
+        book.review = payload.review;
+
+        return book.save()
+    });
 }
 
 async function deleteBook(id) {
@@ -67,6 +75,6 @@ module.exports = {
     updateBook,
     deleteBook,
     likeBook,
-    commentBook, 
+    commentBook,
     getBookComments
 }

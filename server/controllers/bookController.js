@@ -1,7 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const { erorParser } = require('../utils/erorParser');
 const { hasUser } = require('../middlewares/guards');
-const { loadAllBooks, createBook, getBookById, deleteBook, likeBook, commentBook, getBookComments } = require('../services/bookService');
+const { loadAllBooks, createBook, getBookById, deleteBook, likeBook, commentBook, getBookComments, updateBook } = require('../services/bookService');
 const { addToFavorites } = require('../services/userService');
 
 const bookController = require('express').Router();
@@ -13,7 +13,7 @@ bookController.get('/catalog', async (req, res) => {
 
 bookController.post('/create',
     hasUser(),
-    body('img').isURL().withMessage('Img must be a valid URL address!'),
+    body('img').trim().isURL().withMessage('Img must be a valid URL address!'),
     async (req, res) => {
         try {
             const { errors } = validationResult(req);
@@ -43,12 +43,21 @@ bookController.get('/catalog/:id', async (req, res) => {
 });
 
 
-bookController.put('/edit', hasUser(), async (req, res) => {
+bookController.put('/edit/:id', hasUser(), async (req, res) => {
+    const bookId = req.params.id;
+    const payload = req.body;
 
+    try {
+        const updatedBook = await updateBook(bookId, payload);
+        res.json(updatedBook);
+    } catch (err) {
+        const message = erorParser(err);
+        res.status(409).json({ message });
+    }
 });
 
 bookController.delete('/delete/:id', hasUser(), async (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id; //bookID
 
     try {
         await deleteBook(id);
@@ -69,7 +78,6 @@ bookController.post('/favorites', hasUser(), async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
-
 });
 
 bookController.post('/likes', hasUser(), async (req, res) => {

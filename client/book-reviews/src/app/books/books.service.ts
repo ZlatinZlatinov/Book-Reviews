@@ -23,6 +23,11 @@ export class BooksService {
       { title, author, genre, img, review });
   }
 
+  editBook(bookId: string, title: string, author: string, genre: string, img: string, review: string) {
+    return this.http.put<Book>('/token/books/edit/' + bookId,
+      { title, author, genre, img, review });
+  }
+
   deleteBook(id: string) {
     return this.http.delete<any>('/token/books/delete/' + id);
   }

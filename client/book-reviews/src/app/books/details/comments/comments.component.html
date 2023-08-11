@@ -7,19 +7,17 @@
 
             <p *ngIf="!(commentsArray[0])">No comments yet!</p>
 
-            <article *ngFor="let comment of commentsArray" class="flex-container d-flex mb-3">
+            <article *ngFor="let comment of commentsArray" class="flex-container d-flex mb-3 comment-wrapper">
                 <div class="author-post">
 
                     <div class="comment-meta d-flex">
-                        <h4><img src="/assets/images/user.png" alt="default" class="commentorImg">&emsp;
-                            {{comment.ownerName}}
+                        <h4 class="inline-title"><img src="/assets/images/user.png" alt="default" class="commentorImg">&emsp;
+                            {{comment.ownerName | titlecase}}
                         </h4>
-                        <span class="meta-date">{{comment.createdAt}}</span>
+                        <span class="meta-date">Posted at: {{numToDate(comment.createdAt)}}</span>
                     </div><!--meta-tags-->
-
                     <p>{{comment.text}}</p>
                 </div>
-
             </article><!--flex-container-->
 
         </div><!--comment-list-->

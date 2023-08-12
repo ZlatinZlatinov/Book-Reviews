@@ -29,19 +29,23 @@ export class AppInterceptor implements HttpInterceptor {
                 url: req.url.replace('/token', apiUrl),
                 setHeaders: {
                     'Content-Type': 'application/json',
-                    'X-Authorization': this.authService.token! 
+                    'X-Authorization': this.authService.token!
                 }
-                     
+
                 //headers: req.headers.set('x-authorization', this.authService.token!)
             })
         }
 
         return next.handle(req).pipe(
-            catchError((err) => { 
+            catchError((err) => {
                 console.log(err);
-                
-                if(err.status === 404){
-                    this.router.navigate(['**']); 
+
+                if (err.status === 404) {
+                    this.router.navigate(['**']);
+                    return [err];
+                } else if (err.status === 0) {
+                    window.alert('No Connection with the server!')
+                    this.router.navigate(['**']);
                     return [err];
                 }
 

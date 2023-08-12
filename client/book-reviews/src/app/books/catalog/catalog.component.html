@@ -1,9 +1,12 @@
 <section class="padding-large">
 	<div class="container">
 		<div class="row">
+			
+			<p *ngIf="!(books[0])" id="catalog-title">No books yet!
+				<app-loader />
+			</p> 
 
 			<div class="products-grid grid">
-				<p *ngIf="!(books[0])">No books yet!</p>
 
 				<figure *ngFor="let book of books" class="product-style">
 					<img src="{{book.img}}" alt="Books" class="product-item">
@@ -17,7 +20,6 @@
 						<p>{{book.author}}</p>
 					</figcaption>
 				</figure>
-
 			</div>
 
 		</div>

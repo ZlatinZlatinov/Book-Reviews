@@ -7,6 +7,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { DetailsComponent } from './details/details.component';
 import { RouterModule } from '@angular/router';
 import { CommentsComponent } from './details/comments/comments.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CommentsComponent } from './details/comments/comments.component';
   imports: [
     CommonModule,
     ReactiveFormsModule, 
-    RouterModule
+    RouterModule, 
+    SharedModule
   ],
   exports: [
     CreateComponent,

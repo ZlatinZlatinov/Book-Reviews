@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BooksService } from '../books.service';
 import { Book } from '../bookType';
 
@@ -7,9 +7,9 @@ import { Book } from '../bookType';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit, OnDestroy {
 
-  books: Book[] = []
+  books: Book[] = [];
 
   constructor(private booksService: BooksService) { }
 
@@ -19,5 +19,9 @@ export class CatalogComponent implements OnInit {
 
   fetchBooks() {
     this.booksService.getAllBooks().subscribe(data => this.books = data);
+  }
+
+  ngOnDestroy(): void {
+    this.books = [];
   }
 }

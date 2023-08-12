@@ -57,7 +57,7 @@ const routes: Routes = [
     canActivate: [AuthActivate],
   },
   {
-    path: 'notfound', 
+    path: '**', 
     component: NotfoundComponent
   }
 ];

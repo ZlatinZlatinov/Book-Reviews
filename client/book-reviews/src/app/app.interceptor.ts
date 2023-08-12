@@ -41,7 +41,7 @@ export class AppInterceptor implements HttpInterceptor {
                 console.log(err);
                 
                 if(err.status === 404){
-                    this.router.navigate(['notfound']); 
+                    this.router.navigate(['**']); 
                     return [err];
                 }
 

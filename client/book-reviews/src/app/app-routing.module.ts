@@ -9,6 +9,7 @@ import { CreateComponent } from './books/create/create.component';
 import { DetailsComponent } from './books/details/details.component';
 import { AuthActivate } from './is-authenticated.guard';
 import { FavoritesComponent } from './user-favorites/favorites/favorites.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,10 @@ const routes: Routes = [
     path: 'my-favorites', 
     component: FavoritesComponent, 
     canActivate: [AuthActivate],
+  },
+  {
+    path: 'notfound', 
+    component: NotfoundComponent
   }
 ];
 

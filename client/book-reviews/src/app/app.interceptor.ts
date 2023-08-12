@@ -2,6 +2,7 @@ import { Injectable, Provider } from "@angular/core";
 import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http'
 import { Observable, catchError, tap } from "rxjs";
 import { AuthService } from "./auth-user/auth.service";
+import { Router } from "@angular/router";
 
 const apiUrl: string = 'http://localhost:3030';
 
@@ -9,7 +10,7 @@ const apiUrl: string = 'http://localhost:3030';
 
 export class AppInterceptor implements HttpInterceptor {
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private router: Router) { }
 
     intercept(
         req: HttpRequest<any>,
@@ -39,6 +40,11 @@ export class AppInterceptor implements HttpInterceptor {
             catchError((err) => { 
                 console.log(err);
                 
+                if(err.status === 404){
+                    this.router.navigate(['notfound']); 
+                    return [err];
+                }
+
                 window.alert(err.error.message || err.message);
 
                 return [err];

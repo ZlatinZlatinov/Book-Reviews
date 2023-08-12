@@ -67,6 +67,12 @@ async function getBookComments(bookId) {
     return book.comments;
 }
 
+async function getTopRated() {
+    const books = await Book.find({}).lean()//.where('likes'); 
+
+    return books.filter(b => b.likes.length > 0);
+}
+
 module.exports = {
     loadAllBooks,
     getBookById,
@@ -76,5 +82,6 @@ module.exports = {
     deleteBook,
     likeBook,
     commentBook,
-    getBookComments
+    getBookComments,
+    getTopRated
 }

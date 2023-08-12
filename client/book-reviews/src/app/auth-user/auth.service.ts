@@ -34,8 +34,6 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.post<User>('/api/auth/login', { email, password })
       .pipe(tap((response) => { 
-        //console.error(response);
-        
 
         this._isLoggedIn$.next(true);
         this._user$.next(response);
@@ -46,7 +44,15 @@ export class AuthService {
   }
 
   register(email: string, username: string, password: string) {
-    return this.http.post<User>('/api/auth/register', { email, username, password });
+    return this.http.post<User>('/api/auth/register', { email, username, password })
+    .pipe(tap((response) => { 
+
+      this._isLoggedIn$.next(true);
+      this._user$.next(response);
+      localStorage.setItem('auth_token', response.accessToken)
+      localStorage.setItem('username', response.username);
+      localStorage.setItem('userId', response._id);
+    }));
   }
 
   logOut() {

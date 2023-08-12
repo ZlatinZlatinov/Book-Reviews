@@ -4,7 +4,7 @@ const { hasUser } = require('../middlewares/guards');
 const {
     loadAllBooks, createBook, getBookById,
     deleteBook, likeBook, commentBook,
-    getBookComments, updateBook
+    getBookComments, updateBook, getTopRated
 } = require('../services/bookService');
 const { addToFavorites, getUserFavorites } = require('../services/userService');
 
@@ -135,6 +135,16 @@ bookController.get('/favorites', hasUser(), async (req, res) => {
         const message = erorParser(err);
         res.status(404).json({ message });
     }
+})
+
+bookController.get('/top', async (req, res) => {
+    try {
+        const topBooks = await getTopRated();
+        res.json(topBooks);
+    } catch (err) {
+        res.status(404).json({ message: 'Not content found!' });
+    }
+
 })
 
 module.exports = bookController;

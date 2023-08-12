@@ -35,9 +35,9 @@ export class RegisterComponent {
     const password = passGroup?.password;
 
     this.authService.register(email!, username!, password!).subscribe(() => {
-      this.router.navigate(['/']);
+      this.router.navigate(['home']);
     });
 
-    //console.log(this.form.value);
+    console.log(this.form.value);
   }
 }

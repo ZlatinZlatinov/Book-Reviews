@@ -12,12 +12,14 @@ import { SharedModule } from './shared/shared.module';
 import { appInterceptorProvider } from './app.interceptor';
 import { HttpClientModule } from '@angular/common/http';
 import { UserFavoritesModule } from './user-favorites/user-favorites.module';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    AboutComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,

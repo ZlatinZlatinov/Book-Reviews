@@ -50,10 +50,10 @@ bookController.get('/catalog/:id', async (req, res) => {
 bookController.put('/edit/:id', hasUser(), async (req, res) => {
     const bookId = req.params.id;
     const payload = req.body;
-
+   
     try {
         const updatedBook = await updateBook(bookId, payload);
-        res.json(updatedBook);
+        res.json(updatedBook); 
     } catch (err) {
         const message = erorParser(err);
         res.status(409).json({ message });

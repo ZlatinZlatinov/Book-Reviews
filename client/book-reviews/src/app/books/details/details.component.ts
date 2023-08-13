@@ -72,11 +72,15 @@ export class DetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { title, author, genre, img, review } = this.form.value;
+    const { title, author, genre, img, review } = this.form.value; 
+    console.log(title);
+    
 
     this.bookService.editBook(this.bookId, title!, author!, genre!, img!, review!)
       .subscribe((b) => {
-        this.book = b
+        console.log(b);
+        
+        this.book = b;
         this.toggleEdit();
       });
   }

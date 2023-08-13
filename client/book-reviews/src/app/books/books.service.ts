@@ -23,7 +23,9 @@ export class BooksService {
       { title, author, genre, img, review });
   }
 
-  editBook(bookId: string, title: string, author: string, genre: string, img: string, review: string) {
+  editBook(bookId: string, title: string, author: string, genre: string, img: string, review: string) { 
+    console.log(bookId);
+    
     return this.http.put<Book>('/token/books/edit/' + bookId,
       { title, author, genre, img, review });
   }

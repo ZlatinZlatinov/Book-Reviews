@@ -42,7 +42,6 @@ export class DetailsComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.book = response;
 
-
         if (response.ownerId === this.authService.userId) {
           this.isOwner = true;
         }
@@ -72,14 +71,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const { title, author, genre, img, review } = this.form.value; 
-    console.log(title);
-    
+    const { title, author, genre, img, review } = this.form.value;
 
     this.bookService.editBook(this.bookId, title!, author!, genre!, img!, review!)
       .subscribe((b) => {
-        console.log(b);
-        
         this.book = b;
         this.toggleEdit();
       });
@@ -87,6 +82,14 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   toggleEdit() {
     this.toggleEditView = !this.toggleEditView;
+    
+    if (this.toggleEditView) {
+      this.form.controls['title'].setValue(this.book!.title);
+      this.form.controls['author'].setValue(this.book!.author);
+      this.form.controls['genre'].setValue(this.book!.genre);
+      this.form.controls['img'].setValue(this.book!.img);
+      this.form.controls['review'].setValue(this.book!.review);
+    }
   }
 
   ngOnDestroy(): void {

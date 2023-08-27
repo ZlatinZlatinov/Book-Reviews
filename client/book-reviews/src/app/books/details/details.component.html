@@ -1,7 +1,7 @@
-<section class="bg-sand padding-large"> 
+<section class="bg-sand padding-large">
     <div *ngIf="!book" class="container">
         <div class="row">
-            <app-loader/>
+            <app-loader />
         </div>
     </div>
 
@@ -57,10 +57,10 @@
         <section class="form-container edit-container">
             <form [formGroup]="form" (ngSubmit)="editBook()">
                 <h3>Edit Book Review</h3>
-                
+
                 <!--Title-->
                 <label>Title</label>
-                <input type="text" name="title" class="box" [value]="book?.title" formControlName="title">
+                <input type="text" name="title" class="box" formControlName="title">
                 <ng-container *ngIf="form.get('title')?.touched">
                     <span class="error" *ngIf="form.get('title')?.errors?.['required'] ||
             form.get('title')?.errors?.['minlength']">
@@ -71,7 +71,7 @@
 
                 <!--Author-->
                 <label>Author</label>
-                <input type="text" name="author" class="box" [value]="book?.author" formControlName="author">
+                <input type="text" name="author" class="box" formControlName="author">
                 <ng-container *ngIf="form.get('author')?.touched">
                     <span class="error" *ngIf="form.get('author')?.errors?.['required'] || 
             form.get('author')?.errors?.['minlength']">
@@ -81,7 +81,7 @@
 
                 <!--Genre-->
                 <label>Genre</label>
-                <input type="text" name="genre" class="box" [value]="book?.genre" formControlName="genre">
+                <input type="text" name="genre" class="box" formControlName="genre">
                 <ng-container *ngIf="form.get('genre')?.touched">
                     <span class="error" *ngIf="form.get('genre')?.errors?.['required'] || 
             form.get('genre')?.errors?.['minlength']">
@@ -91,7 +91,7 @@
 
                 <!--Image-->
                 <label>Image</label>
-                <input type="text" name="img" class="box" [value]="book?.img" formControlName="img">
+                <input type="text" name="img" class="box" formControlName="img">
                 <ng-container *ngIf="form.get('img')?.touched">
                     <span class="error" *ngIf="form.get('img')?.errors?.['required'] || 
             form.get('img')?.errors?.['maxlength']">
@@ -105,7 +105,7 @@
 
                 <!--Review-->
                 <label>Review</label>
-                <textarea class="box" name="review" [value]="book?.review" formControlName="review"></textarea>
+                <textarea class="box" name="review" formControlName="review"></textarea>
                 <ng-container *ngIf="form.get('review')?.touched">
                     <span class="error" *ngIf="form.get('review')?.errors?.['required']">
                         Book review is required with atleast 20 charactes length
